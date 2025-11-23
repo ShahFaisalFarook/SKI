@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Sun, Zap, TrendingUp, ArrowRight, Play, Sparkles, Award, Users, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Sun, Zap, TrendingUp, ArrowRight, Play, Sparkles, Award, Users, CheckCircle2, IndianRupee, Clock, Shield, Phone } from 'lucide-react';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 300], [0, 100]);
-  const y2 = useTransform(scrollY, [0, 300], [0, -100]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
+        x: (e.clientX / window.innerWidth - 0.5) * 15,
+        y: (e.clientY / window.innerHeight - 0.5) * 15,
       });
     };
 
@@ -22,191 +18,170 @@ const Hero = () => {
   }, []);
 
   const stats = [
-    { icon: Award, value: '60%', label: 'Govt Subsidy', color: 'from-orange-500 to-red-500' },
-    { icon: Users, value: '500+', label: 'Happy Customers', color: 'from-blue-500 to-cyan-500' },
-    { icon: Zap, value: '₹18K+', label: 'Annual Savings', color: 'from-green-500 to-emerald-500' },
+    { icon: Award, value: '60%', label: 'Govt Subsidy', color: 'orange' },
+    { icon: Users, value: '500+', label: 'Happy Customers', color: 'blue' },
+    { icon: IndianRupee, value: '18K+', label: 'Annual Savings', color: 'green' },
   ];
 
   const features = [
-    'Free Installation Consultation',
-    '25 Year Panel Warranty',
-    'EMI Options Available',
-    'Complete Documentation Support',
+    { icon: CheckCircle2, text: 'Free Installation Consultation' },
+    { icon: Shield, text: '25 Year Panel Warranty' },
+    { icon: IndianRupee, text: 'EMI Options Available' },
+    { icon: Clock, text: 'Quick 7-Day Installation' },
   ];
 
-  const floatingElements = [
-    { icon: Sun, delay: 0, duration: 6, x: 20, y: 30 },
-    { icon: Zap, delay: 1, duration: 8, x: 80, y: 20 },
-    { icon: Sparkles, delay: 2, duration: 7, x: 60, y: 70 },
-    { icon: TrendingUp, delay: 1.5, duration: 9, x: 15, y: 60 },
+  const floatingIcons = [
+    { icon: Sun, color: 'text-yellow-400', delay: 0, position: { top: '15%', left: '10%' } },
+    { icon: Zap, color: 'text-blue-400', delay: 0.5, position: { top: '25%', right: '15%' } },
+    { icon: Sparkles, color: 'text-purple-400', delay: 1, position: { bottom: '20%', left: '8%' } },
+    { icon: TrendingUp, color: 'text-green-400', delay: 1.5, position: { bottom: '30%', right: '12%' } },
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
-      {/* Animated Gradient Orbs */}
-      <div className="absolute inset-0 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 overflow-hidden">
+      
+      {/* Clear Gradient Orbs - No Blur */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-orange-500/30 to-pink-500/30 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [90, 0, 90],
-            opacity: [0.4, 0.6, 0.4],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-blue-500/30 to-cyan-500/30 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.4, 0.2],
+            scale: [1, 1.1, 1],
+            x: [0, 50, 0],
+            y: [0, 30, 0],
           }}
           transition={{
             duration: 15,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-orange-500/20 rounded-full blur-3xl"
+          className="absolute -top-20 -right-20 w-72 h-72 bg-orange-500/20 rounded-full blur-[100px]"
         />
-      </div>
-
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-
-      {/* Floating Animated Icons */}
-      {floatingElements.map((element, idx) => (
         <motion.div
-          key={idx}
-          className="absolute hidden lg:block"
-          style={{ left: `${element.x}%`, top: `${element.y}%` }}
           animate={{
-            y: [0, -30, 0],
-            rotate: [0, 360],
-            scale: [1, 1.2, 1],
+            scale: [1.1, 1, 1.1],
+            x: [0, -30, 0],
+            y: [0, 50, 0],
           }}
           transition={{
-            duration: element.duration,
-            delay: element.delay,
+            duration: 18,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-        >
-          <div className="w-16 h-16 bg-gradient-to-br from-orange-500/20 to-blue-500/20 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/10 shadow-2xl">
-            <element.icon className="w-8 h-8 text-orange-400" />
-          </div>
-        </motion.div>
-      ))}
+          className="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-500/20 rounded-full blur-[100px]"
+        />
+      </div>
 
-      {/* Main Content */}
-      <motion.div 
-        style={{ y: y1, opacity }}
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 lg:pt-32 pb-20"
-      >
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Subtle Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+
+      {/* Floating Icons - Desktop Only */}
+      <div className="hidden lg:block">
+        {floatingIcons.map((item, idx) => (
+          <motion.div
+            key={idx}
+            className="absolute"
+            style={item.position}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ 
+              opacity: [0.4, 0.8, 0.4],
+              scale: 1,
+              y: [0, -15, 0],
+            }}
+            transition={{
+              opacity: { duration: 3, delay: item.delay, repeat: Infinity },
+              y: { duration: 4, delay: item.delay, repeat: Infinity, ease: 'easeInOut' },
+              scale: { duration: 0.5, delay: item.delay }
+            }}
+          >
+            <div className="w-12 h-12 bg-slate-800/60 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/10 shadow-xl">
+              <item.icon className={`w-6 h-6 ${item.color}`} />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Main Content Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 lg:pt-20 pb-12 lg:pb-20">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-200px)]">
+          
           {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-            className="space-y-8"
+            transition={{ duration: 0.8 }}
+            className="space-y-6 lg:space-y-8"
           >
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500/20 to-pink-500/20 backdrop-blur-xl border border-orange-500/30 rounded-full px-6 py-3 shadow-lg"
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500/20 to-pink-500/20 backdrop-blur-sm border border-orange-500/40 rounded-full px-4 sm:px-6 py-2 sm:py-3"
             >
-              <Sparkles className="w-5 h-5 text-orange-400" />
-              <span className="text-orange-300 font-semibold text-sm lg:text-base">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+              <span className="text-orange-300 font-semibold text-xs sm:text-sm lg:text-base">
                 PM Surya Ghar Muft Bijli Yojana Partner
               </span>
             </motion.div>
 
-            {/* Main Headline */}
-            <div className="space-y-6">
+            {/* Headline */}
+            <div className="space-y-4">
               <motion.h1
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-                className="text-4xl sm:text-5xl lg:text-7xl font-black leading-tight"
+                transition={{ delay: 0.3 }}
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight"
               >
-                <span className="text-white">Power Your Home</span>
-                <br />
-                <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+                <span className="text-white block">Power Your Home</span>
+                <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent block">
                   with Solar Energy
                 </span>
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-xl"
+                transition={{ delay: 0.4 }}
+                className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed"
               >
                 Get up to <span className="text-orange-400 font-bold">60% government subsidy</span> and save 
-                <span className="text-green-400 font-bold"> ₹15,000-18,000 annually</span> on electricity bills. 
-                Join 500+ satisfied customers in Kashmir.
+                <span className="text-green-400 font-bold"> ₹15,000-18,000 annually</span> on electricity bills.
               </motion.p>
             </div>
 
-            {/* Feature List */}
+            {/* Features Grid */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
+              transition={{ delay: 0.5 }}
               className="grid grid-cols-1 sm:grid-cols-2 gap-3"
             >
               {features.map((feature, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.8 + idx * 0.1 }}
-                  whileHover={{ x: 5 }}
-                  className="flex items-center space-x-2 text-gray-300"
+                  transition={{ delay: 0.6 + idx * 0.1 }}
+                  className="flex items-center space-x-2 text-gray-300 text-sm lg:text-base"
                 >
-                  <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span className="text-sm lg:text-base">{feature}</span>
+                  <feature.icon className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>{feature.text}</span>
                 </motion.div>
               ))}
             </motion.div>
 
             {/* CTA Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              transition={{ delay: 0.7 }}
+              className="flex flex-col sm:flex-row gap-4 pt-2"
             >
               <motion.button
-                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(249, 115, 22, 0.4)' }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 rounded-2xl font-bold text-white text-lg shadow-2xl overflow-hidden"
+                className="group px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl sm:rounded-2xl font-bold text-white text-base sm:text-lg shadow-lg shadow-orange-500/50 hover:shadow-orange-500/70 transition-all"
               >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-orange-400 to-pink-500"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '100%' }}
-                  transition={{ duration: 0.5 }}
-                />
-                <span className="relative flex items-center justify-center space-x-2">
+                <span className="flex items-center justify-center space-x-2">
                   <span>Get Free Quote</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -215,186 +190,204 @@ const Hero = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group px-8 py-4 bg-white/10 backdrop-blur-xl border-2 border-white/20 hover:border-orange-500/50 rounded-2xl font-bold text-white text-lg shadow-xl transition-all"
+                className="group px-6 sm:px-8 py-3 sm:py-4 bg-white/10 backdrop-blur-sm border-2 border-white/20 hover:border-orange-500/50 rounded-xl sm:rounded-2xl font-bold text-white text-base sm:text-lg transition-all"
               >
                 <span className="flex items-center justify-center space-x-2">
-                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-orange-500/30 transition-colors">
-                    <Play className="w-5 h-5 ml-0.5" />
-                  </div>
-                  <span>Watch Demo</span>
+                  <Phone className="w-5 h-5" />
+                  <span>Call Now</span>
                 </span>
               </motion.button>
             </motion.div>
 
             {/* Stats */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1 }}
-              className="grid grid-cols-3 gap-4 pt-8"
+              transition={{ delay: 0.8 }}
+              className="grid grid-cols-3 gap-3 sm:gap-4 pt-4"
             >
               {stats.map((stat, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.2 + idx * 0.1 }}
-                  whileHover={{ y: -5, scale: 1.05 }}
-                  className="relative group"
+                  whileHover={{ y: -5 }}
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center hover:border-white/20 transition-all"
                 >
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 text-center hover:border-orange-500/30 transition-all">
-                    <div className={`w-12 h-12 mx-auto mb-2 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center shadow-lg`}>
-                      <stat.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="text-2xl lg:text-3xl font-black text-white mb-1">
-                      {stat.value}
-                    </div>
-                    <div className="text-xs lg:text-sm text-gray-400">
-                      {stat.label}
-                    </div>
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 bg-gradient-to-br from-${stat.color}-500 to-${stat.color}-600 rounded-lg sm:rounded-xl flex items-center justify-center`}>
+                    <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  </div>
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-1">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs sm:text-sm text-gray-400">
+                    {stat.label}
                   </div>
                 </motion.div>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* Right Visual */}
+          {/* Right Side - Solar Panel with Advertisement */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            style={{ y: y2 }}
-            className="relative hidden lg:block"
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative"
           >
-            {/* 3D Solar Panel Mockup */}
             <motion.div
               style={{
-                rotateY: mousePosition.x,
-                rotateX: mousePosition.y,
+                rotateY: mousePosition.x * 0.5,
+                rotateX: mousePosition.y * 0.5,
               }}
-              transition={{ type: 'spring', stiffness: 50 }}
-              className="relative perspective-1000"
+              className="relative"
             >
-              {/* Main Panel */}
-              <motion.div
-                animate={{
-                  y: [0, -20, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-                className="relative"
-              >
-                {/* Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/50 to-blue-500/50 rounded-3xl blur-3xl" />
+              {/* Main Solar Panel Card */}
+              <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-white/20 shadow-2xl">
                 
-                {/* Panel Container */}
-                <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-2xl border border-white/20 rounded-3xl p-8 shadow-2xl">
-                  {/* Solar Panel Grid */}
-                  <div className="grid grid-cols-6 gap-2 mb-6">
-                    {[...Array(24)].map((_, idx) => (
+                {/* Advertisement Banner */}
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="bg-gradient-to-r from-orange-500 to-pink-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 text-white"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center space-x-2">
+                      <Sun className="w-6 h-6 sm:w-8 sm:h-8" />
+                      <div>
+                        <h3 className="text-base sm:text-lg lg:text-xl font-bold">Kashmir Solar Infratech</h3>
+                        <p className="text-xs sm:text-sm opacity-90">Your Trusted Solar Partner</p>
+                      </div>
+                    </div>
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-full flex items-center justify-center"
+                    >
+                      <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
+                    </motion.div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-3">
+                      <div className="font-bold text-lg sm:text-xl lg:text-2xl">₹78,000</div>
+                      <div className="opacity-90 text-xs">Max Subsidy</div>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-3">
+                      <div className="font-bold text-lg sm:text-xl lg:text-2xl">7 Days</div>
+                      <div className="opacity-90 text-xs">Installation</div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Solar Panel Grid */}
+                <div className="grid grid-cols-6 gap-1 sm:gap-2 mb-4 sm:mb-6">
+                  {[...Array(24)].map((_, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{
+                        delay: 0.6 + idx * 0.02,
+                      }}
+                      className="aspect-square bg-gradient-to-br from-blue-600 to-blue-800 rounded border border-blue-400/30 relative overflow-hidden"
+                    >
                       <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{
-                          delay: 1.5 + idx * 0.02,
-                          duration: 0.3,
+                        animate={{
+                          opacity: [0.3, 0.9, 0.3],
                         }}
-                        className="aspect-square bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg border border-blue-400/30 shadow-lg"
-                      >
-                        <motion.div
-                          animate={{
-                            opacity: [0.3, 0.8, 0.3],
-                          }}
-                          transition={{
-                            duration: 2,
-                            delay: idx * 0.1,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                          }}
-                          className="w-full h-full bg-gradient-to-br from-cyan-400/50 to-transparent rounded-lg"
-                        />
-                      </motion.div>
-                    ))}
+                        transition={{
+                          duration: 2,
+                          delay: idx * 0.1,
+                          repeat: Infinity,
+                        }}
+                        className="absolute inset-0 bg-gradient-to-br from-cyan-400/60 to-transparent"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Live Stats Display */}
+                <div className="space-y-3 sm:space-y-4 bg-slate-950/50 rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-6 border border-white/10">
+                  <div className="flex items-center justify-between text-sm sm:text-base">
+                    <span className="text-gray-400">Power Output</span>
+                    <motion.div
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="flex items-center space-x-2"
+                    >
+                      <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
+                      <span className="text-green-400 font-bold text-base sm:text-lg lg:text-xl">3.5 kW</span>
+                    </motion.div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between text-sm sm:text-base">
+                    <span className="text-gray-400">Efficiency</span>
+                    <span className="text-orange-400 font-bold text-base sm:text-lg">98.5%</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-between text-sm sm:text-base">
+                    <span className="text-gray-400">Status</span>
+                    <div className="flex items-center space-x-2">
+                      <motion.div
+                        animate={{ scale: [1, 1.3, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                        className="w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-full shadow-lg shadow-green-400/50"
+                      />
+                      <span className="text-green-400 font-bold">Active</span>
+                    </div>
                   </div>
 
-                  {/* Info Display */}
-                  <div className="space-y-4 bg-black/30 rounded-2xl p-6 border border-white/10">
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-400 text-sm">Power Output</span>
-                      <motion.span
-                        animate={{ opacity: [1, 0.5, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="text-green-400 font-bold text-lg"
-                      >
-                        3.5 kW
-                      </motion.span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-400 text-sm">Efficiency</span>
-                      <span className="text-orange-400 font-bold text-lg">98.5%</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-400 text-sm">System Status</span>
-                      <div className="flex items-center space-x-2">
-                        <motion.div
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 1, repeat: Infinity }}
-                          className="w-2 h-2 bg-green-400 rounded-full"
-                        />
-                        <span className="text-green-400 font-bold text-sm">Active</span>
+                  {/* Monthly Savings */}
+                  <div className="pt-3 sm:pt-4 border-t border-white/10">
+                    <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-lg p-3 sm:p-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-300 text-xs sm:text-sm">Monthly Savings</span>
+                        <div className="flex items-center space-x-1 text-green-400 font-bold text-lg sm:text-xl lg:text-2xl">
+                          <IndianRupee className="w-4 h-4 sm:w-5 sm:h-5" />
+                          <span>1,500</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* Orbiting Elements */}
+              {/* Orbiting Energy Icons */}
               {[0, 1, 2].map((idx) => (
                 <motion.div
                   key={idx}
-                  className="absolute"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block"
                   animate={{
                     rotate: 360,
                   }}
                   transition={{
-                    duration: 10 + idx * 3,
+                    duration: 8 + idx * 2,
                     repeat: Infinity,
                     ease: 'linear',
                   }}
                   style={{
-                    top: '50%',
-                    left: '50%',
-                    marginLeft: '-20px',
-                    marginTop: '-20px',
+                    width: `${180 + idx * 40}px`,
+                    height: `${180 + idx * 40}px`,
                   }}
                 >
                   <motion.div
                     animate={{
-                      y: [0, -100 - idx * 30, 0],
                       scale: [1, 1.2, 1],
                     }}
                     transition={{
-                      duration: 3,
+                      duration: 2,
                       repeat: Infinity,
-                      ease: 'easeInOut',
+                      delay: idx * 0.3,
                     }}
-                    className="w-10 h-10 bg-gradient-to-br from-orange-400 to-pink-500 rounded-xl flex items-center justify-center shadow-2xl"
+                    className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-orange-400 to-pink-500 rounded-lg flex items-center justify-center shadow-xl"
                   >
-                    <Zap className="w-6 h-6 text-white" />
+                    <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </motion.div>
                 </motion.div>
               ))}
             </motion.div>
           </motion.div>
         </div>
-      </motion.div>
-
-      {/* Bottom Gradient Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-950 to-transparent" />
+      </div>
     </div>
   );
 };

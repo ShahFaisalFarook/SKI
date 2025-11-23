@@ -85,7 +85,7 @@ const Navbar = () => {
                   }}
                 />
                 <img 
-                  src="/src/assets/logo.jpeg"
+                  src="/logo.jpeg"
                   alt="Kashmir Solar Logo" 
                   className="relative h-9 w-9 lg:h-11 lg:w-11 object-contain rounded-lg shadow-xl group-hover:shadow-orange-500/50 transition-shadow border border-orange-500/30"
                 />
@@ -268,7 +268,7 @@ const Navbar = () => {
                     transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                   >
                     <img 
-                      src="/src/assets/logo.jpeg"
+                      src="/logo.jpeg"
                       alt="Logo" 
                       className="h-11 w-11 object-contain rounded-lg shadow-lg"
                     />

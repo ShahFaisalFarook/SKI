@@ -15,7 +15,7 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home', icon: Home, color: 'from-orange-500 to-red-500' },
+    { name: 'Homeee', href: '#home', icon: Home, color: 'from-orange-500 to-red-500' },
     { name: 'About', href: '#about', icon: Info, color: 'from-blue-500 to-cyan-500' },
     { name: 'PM Surya Ghar', href: '#scheme', icon: Sun, color: 'from-yellow-500 to-orange-500' },
     { name: 'Calculator', href: '#calculator', icon: Calculator, color: 'from-green-500 to-emerald-500' },
@@ -31,7 +31,8 @@ const Navbar = () => {
   return (
     <>
       {/* Spacer - Exact height for TopBar + Navbar */}
-      <div className="h-[174px] md:h-28" />
+      <div className="pt-[112px] md:pt-28"></div>
+
 
       <motion.nav
         initial={{ y: -100 }}
@@ -382,3 +383,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+// Final Edit before spacing issue

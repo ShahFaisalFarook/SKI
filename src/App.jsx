@@ -6,11 +6,8 @@ export default function App() {
   return (
     <>
       <TopBar />
-      <Navbar /> 
+      <Navbar />
       <Hero />
-      <Hero />
-      <Hero />
-      
     </>
   )
 }

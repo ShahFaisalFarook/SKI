@@ -23,10 +23,15 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact', icon: Phone, color: 'from-red-500 to-pink-500' },
   ];
 
+  // Calculate exact TopBar height
+  // Mobile: 56px + 62px = 118px
+  // Desktop: 56px
+  const topBarHeight = typeof window !== 'undefined' && window.innerWidth >= 768 ? 56 : 118;
+
   return (
     <>
-      {/* Spacer for both TopBar + Navbar */}
-      <div className="h-[118px] md:h-28" />
+      {/* Spacer - Exact height for TopBar + Navbar */}
+      <div className="h-[174px] md:h-28" />
 
       <motion.nav
         initial={{ y: -100 }}
@@ -34,11 +39,19 @@ const Navbar = () => {
         transition={{ duration: 0.6, delay: 0.3 }}
         className="fixed left-0 right-0 z-40 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 shadow-2xl border-b border-orange-500/20"
         style={{
-          top: '56px',
+          top: '118px',
           backdropFilter: 'blur(20px)',
           backgroundColor: 'rgba(15, 23, 42, 0.98)'
         }}
       >
+        <style jsx>{`
+          @media (min-width: 768px) {
+            nav {
+              top: 56px !important;
+            }
+          }
+        `}</style>
+
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
           <div className="flex justify-between items-center h-14 lg:h-16">
             
@@ -227,8 +240,17 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-[118px] right-0 bottom-0 w-full sm:w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 z-[36] lg:hidden overflow-y-auto"
+              className="fixed right-0 bottom-0 w-full sm:w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 z-[36] lg:hidden overflow-y-auto"
+              style={{ top: '174px' }}
             >
+              <style jsx>{`
+                @media (min-width: 768px) {
+                  div {
+                    top: 112px !important;
+                  }
+                }
+              `}</style>
+
               {/* Header */}
               <div className="relative bg-gradient-to-r from-orange-500 to-pink-500 p-4">
                 <motion.button
